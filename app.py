@@ -34,18 +34,17 @@ from io import BytesIO
 
 st.set_page_config(page_title="Mandi Rate Image Generator", layout="centered")
 st.title("Mandi Rate Image Generator")
-st.markdown("Upload an image and enter the date and rate to generate a new image.")
-uploaded_file = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
+st.markdown("Enter the date and rate to generate a new image.")
 
 st.markdown("### Enter the date and rate")
 new_date = st.text_input("Enter the date (e.g., 2023-10-01):")
 new_price = st.text_input("Enter the rate:")
 if st.button("Generate Image"):
-    if uploaded_file and new_date and new_price:
+    if new_date and new_price:
         try:
-            image = Image.open(uploaded_file).convert("RGB")
+            image = Image.open("image2.png").convert("RGB")
             draw = ImageDraw.Draw(image)
-            FONT_PATH = os.path.join(os.path.dirname(__file__), "ARIAL.TTF")  # Ensure the font file is in the same directory or provide the correct path
+            FONT_PATH = os.path.join(os.path.dirname(__file__), "ARIAL.TTF")
             font_date = ImageFont.truetype(FONT_PATH, 55)
             font_price = ImageFont.truetype(FONT_PATH, 65)
 
@@ -58,7 +57,6 @@ if st.button("Generate Image"):
                 draw.text((date_position[0] + offset[0], date_position[1] + offset[1]), new_date, font=font_date, fill=black)
                 draw.text((price_position[0] + offset[0], price_position[1] + offset[1]), new_price + "/-", font=font_price, fill=black)
 
-            
             st.markdown("### Preview of the updated image")
             st.image(image, caption="Preview Image", use_column_width=True)
             buf = BytesIO()
@@ -66,13 +64,5 @@ if st.button("Generate Image"):
             byte_im = buf.getvalue()
             st.markdown("### Download the updated image")
             st.download_button("Download Updated Image", data=byte_im, file_name="updated_image.png", mime="image/png")
-            # # Save the modified image to a BytesIO object
-            # output_image = BytesIO()
-            # image.save(output_image, format="PNG")
-            # output_image.seek(0)
-
-            # st.image(image, caption="Updated Image", use_column_width=True)
-            # st.download_button("Download Updated Image", data=output_image, file_name="updated_image.png", mime="image/png")
-
         except Exception as e:
             st.error(f"An error occurred: {e}")

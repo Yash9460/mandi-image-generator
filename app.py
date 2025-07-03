@@ -58,7 +58,7 @@ if st.button("Generate Image"):
                 draw.text((price_position[0] + offset[0], price_position[1] + offset[1]), new_price + "/-", font=font_price, fill=black)
 
             st.markdown("### Preview of the updated image")
-            st.image(image, caption="Preview Image", use_column_width=True)
+            st.image(image, caption="Preview Image", use_container_width=True)
             buf = BytesIO()
             image.save(buf, format="PNG")
             byte_im = buf.getvalue()

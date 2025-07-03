@@ -27,6 +27,7 @@
 # print("Image updated and saved as output_image.png")
 
 
+import os
 import streamlit as st
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
@@ -44,9 +45,9 @@ if st.button("Generate Image"):
         try:
             image = Image.open(uploaded_file).convert("RGB")
             draw = ImageDraw.Draw(image)
-
-            font_date = ImageFont.truetype("arial.ttf", 55)
-            font_price = ImageFont.truetype("arial.ttf", 65)
+            FONT_PATH = os.path.join(os.path.dirname(__file__), "ARIAL.TTF")  # Ensure the font file is in the same directory or provide the correct path
+            font_date = ImageFont.truetype(FONT_PATH, 55)
+            font_price = ImageFont.truetype(FONT_PATH, 65)
 
             date_position = (180, 1352)
             price_position = (662, 1350)

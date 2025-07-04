@@ -31,16 +31,18 @@ import os
 import streamlit as st
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
+import datetime
 
 st.set_page_config(page_title="Mandi Rate Image Generator", layout="centered")
 st.title("Mandi Rate Image Generator")
-st.markdown("Enter the date and rate to generate a new image.")
+st.markdown("Enter the rate to generate a new image.")
 
-st.markdown("### Enter the date and rate")
-new_date = st.text_input("Enter the date (e.g., 2023-10-01):")
+st.markdown("### Enter the rate")
+today_str = datetime.date.today().strftime("%d/%m/%Y")
+new_date = today_str  # Date is now set automatically, no input field
 new_price = st.text_input("Enter the rate:")
 if st.button("Generate Image"):
-    if new_date and new_price:
+    if new_price:
         try:
             image = Image.open("image4.png").convert("RGB")
             draw = ImageDraw.Draw(image)
@@ -48,8 +50,8 @@ if st.button("Generate Image"):
             font_date = ImageFont.truetype(FONT_PATH, 55)
             font_price = ImageFont.truetype(FONT_PATH, 65)
 
-            date_position = (662, 1350)
-            price_position = (180, 1347)
+            date_position = (620, 1350)
+            price_position = (170, 1347)
 
             black = (0, 0, 0)
 

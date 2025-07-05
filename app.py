@@ -44,14 +44,14 @@ new_price = st.text_input("Enter the rate:")
 if st.button("Generate Image"):
     if new_price:
         try:
-            image = Image.open("image4.png").convert("RGB")
+            image = Image.open("img5.png").convert("RGB")
             draw = ImageDraw.Draw(image)
             FONT_PATH = os.path.join(os.path.dirname(__file__), "ARIAL.TTF")
-            font_date = ImageFont.truetype(FONT_PATH, 55)
-            font_price = ImageFont.truetype(FONT_PATH, 65)
+            font_date = ImageFont.truetype(FONT_PATH, 40)
+            font_price = ImageFont.truetype(FONT_PATH, 120)
 
-            date_position = (620, 1350)
-            price_position = (170, 1347)
+            date_position = (70, 165)
+            price_position = (380, 800)
 
             black = (0, 0, 0)
 
